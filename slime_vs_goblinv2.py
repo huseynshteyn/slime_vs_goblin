@@ -19,6 +19,11 @@ SCALED_SIZE = 64
 slime_sheet = pygame.image.load("slime_sheet_v2.png").convert_alpha()
 goblin_sheet = pygame.image.load("goblin_sheet_1.png").convert_alpha()
 
+pygame.mixer.music.load("background_music.mp3")
+pygame.mixer.music.play(-1)
+attack_sound = pygame.mixer.Sound("attack_sound.mp3")
+attack_sound.set_volume(0.5)
+
 # === FRAME EXTRACTION FUNCTION ===
 def get_animation_frames(sheet, row, frame_count):
     frames = []
@@ -80,6 +85,7 @@ while running:
         if keys[pygame.K_SPACE] and attack_timer==0: 
             slime_action="attack"
             attack_timer=6
+            attack_sound.play()
             
             distance=abs(slime_x-goblin_x)
             if distance<80 and goblin_alive: 
